@@ -7,11 +7,12 @@ import {
   Tooltip,
   Cell,
   LabelList,
+  CartesianGrid
 } from "recharts";
 
 function BinRanking({ zone, data, loading, onSelectBin, selectedBin }) {
   if (!zone) {
-    return <p style={{ color: "#888" }}>Select a zone to view ranking</p>;
+    return <p style={{ color: "#64748b" }}>Select a zone to view ranking</p>;
   }
 
   if (loading) {
@@ -19,7 +20,7 @@ function BinRanking({ zone, data, loading, onSelectBin, selectedBin }) {
   }
 
   if (!data || data.length === 0) {
-    return <p style={{ color: "#888" }}>No data available for this selection</p>;
+    return <p style={{ color: "#64748b" }}>No data available for this selection</p>;
   }
 
   const values = data.map((d) => Number(d.avg_risk) || 0);
@@ -38,13 +39,23 @@ function BinRanking({ zone, data, loading, onSelectBin, selectedBin }) {
   const getColor = (value) => {
     const n = normalize(value);
 
-    if (n >= 0.66) return "#dc2626";
-    if (n >= 0.33) return "#f97316";
-    return "#16a34a";
+    if (n >= 0.66) return "#dc2626"; // high
+    if (n >= 0.33) return "#f97316"; // medium
+    return "#16a34a"; // low
   };
 
   return (
-    <div style={{ width: "100%", height: 420 }}>
+    <div
+      style={{
+        width: "100%",
+        height: 420,
+        background: "#ffffff", // ✅ white card
+        padding: "16px",
+        borderRadius: "14px",
+        border: "1px solid #dbe4ea",
+        boxShadow: "0 8px 20px rgba(15, 23, 42, 0.05)"
+      }}
+    >
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}
@@ -52,36 +63,41 @@ function BinRanking({ zone, data, loading, onSelectBin, selectedBin }) {
           margin={{ top: 20, right: 60, left: 80, bottom: 20 }}
           barCategoryGap="20%"
         >
+          {/* light grid */}
+          <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" />
+
           <XAxis
             type="number"
             domain={[domainMin, domainMax]}
-            tick={{ fill: "#cbd5e1" }}
-            axisLine={{ stroke: "#475569" }}
-            tickLine={{ stroke: "#475569" }}
+            tick={{ fill: "#64748b" }}
+            axisLine={{ stroke: "#cbd5e1" }}
+            tickLine={{ stroke: "#cbd5e1" }}
           />
 
           <YAxis
             type="category"
             dataKey="bin"
             width={120}
-            tick={{ fill: "#cbd5e1" }}
-            axisLine={{ stroke: "#475569" }}
-            tickLine={{ stroke: "#475569" }}
+            tick={{ fill: "#334155" }}
+            axisLine={{ stroke: "#cbd5e1" }}
+            tickLine={{ stroke: "#cbd5e1" }}
           />
 
           <Tooltip
             formatter={(value) => [Number(value).toFixed(2), "Avg Risk"]}
             contentStyle={{
-              background: "#0f172a",
-              border: "1px solid #334155",
+              background: "#ffffff",
+              border: "1px solid #e2e8f0",
               borderRadius: "8px",
-              color: "#fff",
+              color: "#0f172a",
+              boxShadow: "0 4px 12px rgba(15, 23, 42, 0.08)"
             }}
           />
 
           <Bar
             dataKey="avg_risk"
             barSize={36}
+            radius={[8, 8, 8, 8]}
             onClick={(entry) => {
               const bin = entry?.bin || entry?.payload?.bin;
               if (bin) onSelectBin(bin);
@@ -91,8 +107,8 @@ function BinRanking({ zone, data, loading, onSelectBin, selectedBin }) {
               <Cell
                 key={`cell-${index}`}
                 fill={getColor(Number(entry.avg_risk) || 0)}
-                stroke={selectedBin === entry.bin ? "#ffffff" : "none"}
-                strokeWidth={selectedBin === entry.bin ? 3 : 0}
+                stroke={selectedBin === entry.bin ? "#0f172a" : "none"}
+                strokeWidth={selectedBin === entry.bin ? 2 : 0}
               />
             ))}
 
@@ -101,7 +117,7 @@ function BinRanking({ zone, data, loading, onSelectBin, selectedBin }) {
               position="right"
               offset={8}
               formatter={(value) => Number(value).toFixed(1)}
-              fill="#ffffff"
+              fill="#0f172a"
               style={{ fontSize: "12px", fontWeight: "600" }}
             />
           </Bar>
