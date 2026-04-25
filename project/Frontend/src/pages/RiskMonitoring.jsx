@@ -351,13 +351,13 @@ useEffect(() => {
     METRIC_OPTIONS.find((m) => m.value === focusMetric)?.label || focusMetric;
 
   const panelStyle = {
-    background: "rgba(15, 23, 42, 0.78)",
-    border: "1px solid rgba(148, 163, 184, 0.14)",
-    borderRadius: "16px",
-    padding: "16px",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.18)",
-    marginBottom: "18px",
-  };
+  background: "#ffffff", // 
+  border: "1px solid #dbe4ea", // 
+  borderRadius: "14px",
+  padding: "16px",
+  boxShadow: "0 8px 20px rgba(15, 23, 42, 0.05)", // 
+  marginBottom: "18px",
+};
 
   const chartWrap = { width: "100%", height: 320, minWidth: 0 };
   const smallChartWrap = { width: "100%", height: 280, minWidth: 0 };
@@ -392,10 +392,10 @@ useEffect(() => {
     marginBottom: "20px",
     padding: "16px 20px",
     borderRadius: "18px",
-    background: "rgba(15, 23, 42, 0.65)",
+    background: "#ffffff",
     backdropFilter: "blur(10px)",
-    border: "1px solid rgba(148, 163, 184, 0.18)",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.35)",
+    border: "1px solid #e2e8f0",
+    boxShadow: "0 6px 16px rgba(15, 23, 42, 0.05)",
     flexWrap: "wrap",
   }}
 >
@@ -411,9 +411,9 @@ useEffect(() => {
         value={selectedBin}
         onChange={(e) => setSelectedBin(e.target.value)}
         style={{
-          background: "#020617",
-          color: "#e2e8f0",
-          border: "1px solid #1e293b",
+         background: "#ffffff", // ✅ FIX
+          color: "#0f172a", // ✅ FIX
+          border: "1px solid #e2e8f0",
           borderRadius: "10px",
           padding: "8px 12px",
           minWidth: "160px",
@@ -437,9 +437,9 @@ useEffect(() => {
         value={selectedRisk}
         onChange={(e) => setSelectedRisk(e.target.value)}
         style={{
-          background: "#020617",
-          color: "#e2e8f0",
-          border: "1px solid #1e293b",
+          background: "#ffffff",
+          color: "#0f172a",
+          border: "1px solid #e2e8f0",
           borderRadius: "10px",
           padding: "8px 12px",
           minWidth: "160px",
@@ -462,9 +462,9 @@ useEffect(() => {
         value={focusMetric}
         onChange={(e) => setFocusMetric(e.target.value)}
         style={{
-          background: "#020617",
-          color: "#e2e8f0",
-          border: "1px solid #1e293b",
+          background: "#ffffff",
+          color: "#0f172a",
+          border: "1px solid #e2e8f0",
           borderRadius: "10px",
           padding: "8px 12px",
           minWidth: "160px",
@@ -485,10 +485,10 @@ useEffect(() => {
     <div
       style={{
         display: "flex",
-        background: "#020617",
+        background: "#f1f5f9", // ✅ FIX
         borderRadius: "999px",
         padding: "4px",
-        border: "1px solid #1e293b",
+        border: "1px solid #e2e8f0", // ✅ FIX
       }}
     >
       {RANGE_OPTIONS.map((o) => (
