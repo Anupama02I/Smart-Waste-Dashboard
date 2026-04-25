@@ -145,7 +145,8 @@ function Overview() {
   }
 
   return (
-  <div style={{ width: "100%" }}>
+  <div style={{ width: "100%",
+   }}>
     <h2 className="page-title">Overview</h2>
 
     {/* DATE */}
