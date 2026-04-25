@@ -1,9 +1,20 @@
 function BinDetails({ summary }) {
   if (!summary) {
     return (
-      <div style={{ border: "1px solid #334155", padding: "16px", borderRadius: "12px", width: "100%" }}>
-        <h3>Bin Details</h3>
-        <p style={{ color: "#94a3b8" }}>Select a zone and bin to view details.</p>
+      <div
+        style={{
+          background: "#ffffff",
+          border: "1px solid #dbe4ea",
+          padding: "16px",
+          borderRadius: "14px",
+          width: "100%",
+          boxShadow: "0 8px 20px rgba(15, 23, 42, 0.05)"
+        }}
+      >
+        <h3 style={{ color: "#0f172a" }}>Bin Details</h3>
+        <p style={{ color: "#64748b" }}>
+          Select a zone and bin to view details.
+        </p>
       </div>
     );
   }
@@ -23,15 +34,30 @@ function BinDetails({ summary }) {
     { label: "Risk Level", value: summary.riskLevel },
   ];
 
+  const getRiskColor = (level) => {
+    if (level === "High") return "#dc2626";
+    if (level === "Medium") return "#f97316";
+    return "#16a34a";
+  };
+
   return (
-    <div style={{ border: "1px solid #334155", padding: "16px", borderRadius: "12px", width: "100%" }}>
-      <h3>Bin Details</h3>
+    <div
+      style={{
+        background: "#ffffff",
+        border: "1px solid #dbe4ea",
+        padding: "16px",
+        borderRadius: "14px",
+        width: "100%",
+        boxShadow: "0 8px 20px rgba(15, 23, 42, 0.05)"
+      }}
+    >
+      <h3 style={{ color: "#0f172a" }}>Bin Details</h3>
 
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
-          gap: "10px",
+          gap: "12px",
           marginTop: "14px",
         }}
       >
@@ -39,14 +65,34 @@ function BinDetails({ summary }) {
           <div
             key={item.label}
             style={{
-              background: "#0f172a",
-              border: "1px solid #334155",
+              background: "#f8fafc",
+              border: "1px solid #e2e8f0",
               borderRadius: "10px",
               padding: "10px",
             }}
           >
-            <div style={{ fontSize: "12px", color: "#94a3b8" }}>{item.label}</div>
-            <div style={{ fontSize: "16px", fontWeight: 600 }}>{item.value}</div>
+            <div
+              style={{
+                fontSize: "12px",
+                color: "#64748b",
+                marginBottom: "4px"
+              }}
+            >
+              {item.label}
+            </div>
+
+            <div
+              style={{
+                fontSize: "16px",
+                fontWeight: 600,
+                color:
+                  item.label === "Risk Level"
+                    ? getRiskColor(item.value)
+                    : "#0f172a"
+              }}
+            >
+              {item.value}
+            </div>
           </div>
         ))}
       </div>
