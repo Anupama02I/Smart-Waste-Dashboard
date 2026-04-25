@@ -205,10 +205,10 @@ const filterContainer = {
   gap: "20px",
   marginBottom: "20px",
   padding: "16px",
-  background: "#0f172a",
+  background: "#ffffff", // ✅ fixed
   borderRadius: "14px",
-  border: "1px solid #1e293b",
-  boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+  border: "1px solid #e2e8f0", // ✅ fixed
+  boxShadow: "0 6px 16px rgba(15, 23, 42, 0.05)", // ✅ fixed
   flexWrap: "wrap",
 };
 
@@ -220,23 +220,23 @@ const filterBlock = {
 
 const labelStyle = {
   fontSize: "12px",
-  color: "#94a3b8",
+  color: "#64748b", // ✅ fixed
 };
 
 const selectStyle = {
   padding: "8px 12px",
-  background: "#020617",
-  color: "#fff",
-  border: "1px solid #334155",
+  background: "#ffffff", // ✅ fixed
+  color: "#0f172a", // ✅ fixed
+  border: "1px solid #e2e8f0", // ✅ fixed
   borderRadius: "8px",
   minWidth: "140px",
 };
 
 const pillStyle = {
   padding: "6px 12px",
-  border: "1px solid #334155",
+  border: "1px solid #e2e8f0", // ✅ fixed
   borderRadius: "999px",
-  color: "#fff",
+  color: "#64748b", // ✅ fixed
   cursor: "pointer",
   fontSize: "12px",
   transition: "0.2s",
