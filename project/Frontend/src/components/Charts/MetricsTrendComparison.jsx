@@ -33,9 +33,8 @@ function getPaddedDomain(values, padRatio = 0.2, minPad = 1) {
 }
 
 function MetricsTrendComparison({ metricTrendData = [], selectedMetric }) {
-  // ✅ Prevent crash
   if (!Array.isArray(metricTrendData) || metricTrendData.length === 0) {
-    return <p style={{ color: "#94a3b8" }}>No data available</p>;
+    return <p style={{ color: "#64748b" }}>No data available</p>; // ✅ fixed
   }
 
   const metrics = ["temperature", "humidity", "methane", "ammonia"];
@@ -57,26 +56,38 @@ function MetricsTrendComparison({ metricTrendData = [], selectedMetric }) {
         data={metricTrendData}
         margin={{ top: 10, right: 20, left: 0, bottom: 30 }}
       >
-        <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+        {/* ✅ Light grid */}
+        <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
 
-        <XAxis dataKey="date" tick={{ fill: "#cbd5e1", fontSize: 12 }} />
+        {/* ✅ Light axis */}
+        <XAxis
+          dataKey="date"
+          tick={{ fill: "#64748b", fontSize: 12 }}
+          axisLine={{ stroke: "#cbd5e1" }}
+          tickLine={{ stroke: "#cbd5e1" }}
+        />
 
         <YAxis
           domain={yDomain}
-          tick={{ fill: "#cbd5e1", fontSize: 12 }}
+          tick={{ fill: "#64748b", fontSize: 12 }}
           tickCount={6}
+          axisLine={{ stroke: "#cbd5e1" }}
+          tickLine={{ stroke: "#cbd5e1" }}
         />
 
+        {/* ✅ Light tooltip */}
         <Tooltip
           contentStyle={{
-            background: "#0f172a",
-            border: "1px solid #334155",
+            background: "#ffffff",
+            border: "1px solid #e2e8f0",
             borderRadius: "10px",
-            color: "#fff",
+            color: "#0f172a",
+            boxShadow: "0 4px 12px rgba(15, 23, 42, 0.08)",
           }}
         />
 
-        <Legend />
+        {/* ✅ Legend text fix */}
+        <Legend wrapperStyle={{ color: "#334155" }} />
 
         {visibleMetrics.map((metric) => (
           <Line
