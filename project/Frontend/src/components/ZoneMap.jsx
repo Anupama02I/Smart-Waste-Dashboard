@@ -1,8 +1,6 @@
 function ZoneMap({ data, selectedZone, onZoneClick }) {
-  // Get zones
   const zones = ["Zone A", "Zone B", "Zone C", "Zone D", "Zone E"];
 
-  // Count bins per zone
   const getCount = (zone) => {
     const uniqueBins = new Set(
       data
@@ -12,7 +10,6 @@ function ZoneMap({ data, selectedZone, onZoneClick }) {
     return uniqueBins.size;
   };
 
-  // SVG positions (map-like layout)
   const layout = {
     "Zone A": { x: 80, y: 60 },
     "Zone B": { x: 260, y: 60 },
@@ -25,16 +22,19 @@ function ZoneMap({ data, selectedZone, onZoneClick }) {
     <div
       style={{
         width: "100%",
-        background: "#0f172a",
+        background: "#ffffff", // ✅ white card
         borderRadius: "16px",
-        padding: "10px",
-        border: "1px solid #334155",
+        padding: "12px",
+        border: "1px solid #dbe4ea",
+        boxShadow: "0 8px 20px rgba(15, 23, 42, 0.05)"
       }}
     >
       <svg viewBox="0 0 600 350" width="100%" height="300">
         {zones.map((zone) => {
           const pos = layout[zone];
           const count = getCount(zone);
+
+          const isSelected = selectedZone === zone;
 
           return (
             <g
@@ -50,22 +50,18 @@ function ZoneMap({ data, selectedZone, onZoneClick }) {
                 ry="16"
                 width="160"
                 height="120"
-                fill={
-                  selectedZone === zone ? "#2563eb" : "#1e293b"
-                }
-                stroke={
-                  selectedZone === zone ? "#60a5fa" : "#334155"
-                }
-                strokeWidth={selectedZone === zone ? 3 : 1}
+                fill={isSelected ? "#22c55e" : "#f8fafc"} // ✅ light box
+                stroke={isSelected ? "#16a34a" : "#e2e8f0"}
+                strokeWidth={isSelected ? 3 : 1}
               />
 
               {/* Zone name */}
               <text
-                x={pos.x + 70}
-                y={pos.y + 35}
+                x={pos.x + 80}
+                y={pos.y + 40}
                 textAnchor="middle"
-                fill="#e2e8f0"
-                fontSize="24"
+                fill={isSelected ? "#ffffff" : "#0f172a"}
+                fontSize="20"
                 fontWeight="600"
               >
                 {zone}
@@ -73,11 +69,11 @@ function ZoneMap({ data, selectedZone, onZoneClick }) {
 
               {/* Bin count */}
               <text
-                x={pos.x + 70}
-                y={pos.y + 60}
+                x={pos.x + 80}
+                y={pos.y + 70}
                 textAnchor="middle"
-                fill="#94a3b8"
-                fontSize="18"
+                fill={isSelected ? "#dcfce7" : "#64748b"}
+                fontSize="16"
               >
                 {count} bins
               </text>
